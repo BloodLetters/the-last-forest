@@ -1,18 +1,23 @@
 [gd_scene format=3 uid="uid://seik2vxwwgpk"]
 
 [ext_resource type="Texture2D" uid="uid://dbmv15i8b6bh4" path="res://Assets/Frame/Frame-plant.png" id="1_egqvy"]
+[ext_resource type="Script" uid="uid://cx3t7l53jf1xc" path="res://Scene/Cards/Hujan.gd" id="1_jpg6m"]
 [ext_resource type="Texture2D" uid="uid://bdk44tgoxyxm" path="res://Assets/Element/awan-hujan.png" id="2_oqbc7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_od4l2"]
 size = Vector2(180, 194)
 
 [node name="Card" type="Node2D" unique_id=1517803086]
+scale = Vector2(0.5025024, 0.5503486)
+script = ExtResource("1_jpg6m")
 
 [node name="Frame" type="Sprite2D" parent="." unique_id=1829544697]
+texture_filter = 4
 scale = Vector2(0.4673469, 0.44928783)
 texture = ExtResource("1_egqvy")
 
 [node name="Element" type="Sprite2D" parent="." unique_id=867936729]
+texture_filter = 4
 position = Vector2(2.3841858e-07, -1.1920929e-07)
 scale = Vector2(0.3039143, 0.26626015)
 texture = ExtResource("2_oqbc7")
@@ -22,3 +27,7 @@ texture = ExtResource("2_oqbc7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1374858591]
 position = Vector2(3, 6)
 shape = SubResource("RectangleShape2D_od4l2")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
