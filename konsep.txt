@@ -1,0 +1,184 @@
+The Last Forest: Life on Land (SDG 15)
+
+Konsep:
+Kamu adalah “Spirit of Nature” yang menghidupkan kembali dunia hutan terakhir yang telah menjadi tanah tandus.
+
+======================================
+WORLD SYSTEM
+======================================
+Dunia menggunakan sistem grid/tile.
+
+Setiap tile memiliki status:
+- Soil: tandus / lembab / subur
+- Water: kering / cukup / banjir
+- Temperature: dingin / normal / panas
+- Life: kosong / tanaman / hewan / ekosistem
+
+Semua status berubah berdasarkan kartu yang dimainkan.
+
+======================================
+CARD SYSTEM
+======================================
+
+1. Element Cards:
+- Hujan:
+  + Water
+  + Soil lembab
+- Matahari:
+  + Growth
+  - Water
+- Angin:
+  Menyebarkan efek ke tile sekitar
+
+2. Nature Cards:
+- Rumput:
+  Butuh soil + water
+- Pohon:
+  Butuh kondisi stabil
+- Hewan:
+  Butuh makanan dan habitat
+
+3. Balance Cards:
+- Awan:
+  Mengontrol hujan
+- Musim:
+  Mengubah kondisi global
+- Sungai:
+  Menyebarkan air ke tile lain
+
+======================================
+GROWTH SYSTEM (CHAIN REACTION)
+======================================
+Contoh:
+- Tanah tandus + Hujan → Soil menjadi lembab
+- Soil lembab + Matahari → Rumput tumbuh
+- Rumput + waktu → Hewan kecil muncul
+- Hewan + Pohon → Ekosistem terbentuk
+
+Semua terjadi secara bertahap, tidak instan.
+
+======================================
+ADDICTION SYSTEM (OVERUSE)
+======================================
+Jika kartu digunakan berlebihan:
+
+- Hujan berlebihan → Banjir → Tanaman mati
+- Matahari berlebihan → Kekeringan → Hewan mati
+- Angin berlebihan → Ekosistem rusak
+
+Setiap kartu memiliki batas alami.
+
+======================================
+BUFF SYSTEM
+======================================
+
+1. Fertile Soil:
+Trigger:
+- Hujan + Matahari seimbang
+Efek:
+- Growth +50%
+- Tanaman tumbuh lebih cepat
+
+2. Ecosystem Stability:
+Trigger:
+- Ada tanaman + hewan
+Efek:
+- Lebih tahan terhadap debuff
+
+3. Forest Blessing:
+Trigger:
+- Banyak pohon
+Efek:
+- Regenerasi soil dan water otomatis
+- Spawn hewan lebih cepat
+
+4. Water Flow:
+Trigger:
+- Sungai terbentuk
+Efek:
+- Distribusi air ke tile sekitar
+
+======================================
+DEBUFF SYSTEM
+======================================
+
+1. Drought:
+Penyebab:
+- Terlalu banyak matahari
+Efek:
+- Water = 0
+- Tanaman mati perlahan
+
+2. Flood:
+Penyebab:
+- Hujan berlebihan
+Efek:
+- Tanaman mati
+- Hewan kabur
+
+3. Ecosystem Collapse:
+Penyebab:
+- Ketidakseimbangan ekstrem
+Efek:
+- Semua pertumbuhan berhenti
+
+4. Extinction:
+Penyebab:
+- Habitat rusak
+Efek:
+- Hewan hilang permanen di tile tersebut
+
+======================================
+STRATEGY SYSTEM
+======================================
+- Energy per turn terbatas
+- Cooldown kartu
+- Deck terbatas (roguelike)
+
+Player harus berpikir, tidak bisa spam kartu.
+
+======================================
+CORE GAME LOOP
+======================================
+1. Pilih kartu
+2. Gunakan pada tile
+3. Tile berubah
+4. Chain reaction terjadi
+5. Buff/Debuff muncul
+6. Dunia berkembang atau rusak
+
+======================================
+WIN CONDITION
+======================================
+- Semua tile mencapai ekosistem stabil
+- Dunia kembali hijau
+
+======================================
+LOSE CONDITION
+======================================
+- Terlalu banyak tile mati
+- Ekosistem hancur total
+
+======================================
+IDE TAMBAHAN
+======================================
+
+Global Event:
+- El Nino → suhu meningkat
+- Badai → efek acak
+
+Evolution:
+- Hewan berkembang
+- Tanaman jadi lebih kuat
+
+Visual:
+- Perubahan warna tile (kering → hijau)
+- Animasi pertumbuhan
+
+======================================
+CORE DESIGN PRINCIPLE
+======================================
+Game ini tentang keseimbangan.
+
+Jika player bisa menang dengan spam kartu → sistem gagal.
+Jika player harus menjaga keseimbangan → game berhasil.
