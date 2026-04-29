@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://idtal4s7lpeu"]
+
+[ext_resource type="Script" uid="uid://cx3t7l53jf1xc" path="res://Scene/Cards/Hujan.gd" id="1_l50is"]
+[ext_resource type="Texture2D" uid="uid://dbmv15i8b6bh4" path="res://Assets/Frame/Frame-plant.png" id="2_ivbva"]
+[ext_resource type="Texture2D" uid="uid://ca7gh5060hpp5" path="res://Assets/Element/Matahari.png" id="3_l50is"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_od4l2"]
+size = Vector2(178.96524, 200.34442)
+
+[node name="Card" type="Node2D" unique_id=1517803086]
+texture_filter = 1
+texture_repeat = 2
+scale = Vector2(0.40577978, 0.37101558)
+script = ExtResource("1_l50is")
+
+[node name="Frame" type="Sprite2D" parent="." unique_id=1829544697]
+texture_filter = 1
+scale = Vector2(0.23339947, 0.23155837)
+texture = ExtResource("2_ivbva")
+
+[node name="Element" type="Sprite2D" parent="." unique_id=867936729]
+texture_filter = 1
+position = Vector2(2.3841858e-07, -0.392231)
+scale = Vector2(0.3039143, 0.30807367)
+texture = ExtResource("3_l50is")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=640525153]
+texture_filter = 4
+texture_repeat = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1374858591]
+position = Vector2(2.933851, 7.705565)
+scale = Vector2(0.99999964, 0.99999964)
+shape = SubResource("RectangleShape2D_od4l2")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
