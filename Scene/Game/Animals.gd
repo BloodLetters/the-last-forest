@@ -8,6 +8,13 @@ var ai_timer: float = 0.0
 @export var move_interval_min: float = 1.0
 @export var move_interval_max: float = 3.0
 
+@export_category("Movement Animation")
+@export var jump_height: float = 10.0
+@export var jump_duration: float = 0.3
+@export var jump_swing_angle: float = 20.0
+
+var _is_moving: bool = false
+
 func _ready():
 	ai_timer = randf_range(move_interval_min, move_interval_max)
 
@@ -17,12 +24,13 @@ func _process(delta):
 		var snapped = snap_to_grid(mouse_pos)
 		position = snapped
 	else:
-		# Sistem AI: Bergerak acak secara periodik 
-		# TODO: Butuh di improve
-		ai_timer -= delta
-		if ai_timer <= 0:
-			ai_timer = randf_range(move_interval_min, move_interval_max)
-			move_randomly()
+		# Sistem AI: Bergerak acak secara periodik
+		# Butuh di improve
+		if not _is_moving:
+			ai_timer -= delta
+			if ai_timer <= 0:
+				ai_timer = randf_range(move_interval_min, move_interval_max)
+				move_randomly()
 
 func move_randomly():
 	var dirs = [Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1)]
@@ -32,7 +40,35 @@ func move_randomly():
 	
 	var size = get_viewport_rect().size
 	if new_pos.x >= 0 and new_pos.x < size.x and new_pos.y >= 0 and new_pos.y < size.y:
-		position = new_pos
+		_animate_move(new_pos, random_dir.x)
+
+func _animate_move(target_pos: Vector2, dir_x: float) -> void:
+	_is_moving = true
+	var target_rotation = 0.0
+	if dir_x > 0:
+		target_rotation = jump_swing_angle
+		flip_h = false
+	elif dir_x < 0:
+		target_rotation = - jump_swing_angle
+		flip_h = true
+	else:
+		target_rotation = jump_swing_angle if randf() > 0.5 else -jump_swing_angle
+		
+	var base_offset_y = offset.y
+	
+	var pos_tween = create_tween().set_parallel(true)
+	pos_tween.tween_property(self , "position", target_pos, jump_duration)
+	
+	var jump_tween = create_tween()
+	jump_tween.tween_property(self , "offset:y", base_offset_y - jump_height, jump_duration * 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	jump_tween.tween_property(self , "offset:y", base_offset_y, jump_duration * 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	
+	var rot_tween = create_tween()
+	rot_tween.tween_property(self , "rotation_degrees", target_rotation, jump_duration * 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	rot_tween.tween_property(self , "rotation_degrees", 0.0, jump_duration * 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	
+	await get_tree().create_timer(jump_duration).timeout
+	_is_moving = false
 
 
 func snap_to_grid(pos: Vector2) -> Vector2:
