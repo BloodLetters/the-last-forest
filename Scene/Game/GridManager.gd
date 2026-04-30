@@ -38,23 +38,20 @@ func spawn_one_animal():
 		new_animal.visible = true # Tampilkan hasil duplikat
 		new_animal.is_following_mouse = false
 		
-		# Pilih hewan acak baru
 		new_animal.spawn_random_animal()
 		
-		# Tentukan posisi grid acak
-		var rx = randi_range(7, 38) * cell_size
-		var ry = randi_range(2, 11) * cell_size
+		var rx = randi_range(2, 34) * cell_size
+		var ry = randi_range(0, 15) * cell_size
 		new_animal.position = Vector2(rx, ry)
 		
-		# Tambahkan ke dalam GridManager
 		add_child(new_animal)
 		_spawned_count += 1
 
 func _draw():
-	var start_x = 7 * cell_size
-	var end_x = 38 * cell_size
-	var start_y = 2 * cell_size
-	var end_y = 11 * cell_size
+	var start_x = 2 * cell_size
+	var end_x = 34 * cell_size
+	var start_y = 0 * cell_size
+	var end_y = 15 * cell_size
 
 	for x in range(start_x, end_x + cell_size, cell_size):
 		draw_my_dashed_line(Vector2(x, start_y), Vector2(x, end_y), grid_color, grid_width)

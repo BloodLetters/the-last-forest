@@ -41,7 +41,7 @@ func move_randomly():
 	var grid_x = floor(new_pos.x / cell_size)
 	var grid_y = floor(new_pos.y / cell_size)
 	
-	if grid_x >= 7 and grid_x <= 38 and grid_y >= 2 and grid_y <= 11:
+	if grid_x >= 2 and grid_x <= 34 and grid_y >= 0 and grid_y <= 15:
 		_animate_move(new_pos, random_dir.x)
 		
 func _animate_move(target_pos: Vector2, dir_x: float) -> void:
