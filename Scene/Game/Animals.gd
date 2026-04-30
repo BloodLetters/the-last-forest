@@ -38,10 +38,12 @@ func move_randomly():
 	
 	var new_pos = position + (random_dir * cell_size)
 	
-	var size = get_viewport_rect().size
-	if new_pos.x >= 0 and new_pos.x < size.x and new_pos.y >= 0 and new_pos.y < size.y:
+	var grid_x = floor(new_pos.x / cell_size)
+	var grid_y = floor(new_pos.y / cell_size)
+	
+	if grid_x >= 7 and grid_x <= 38 and grid_y >= 2 and grid_y <= 11:
 		_animate_move(new_pos, random_dir.x)
-
+		
 func _animate_move(target_pos: Vector2, dir_x: float) -> void:
 	_is_moving = true
 	var target_rotation = 0.0

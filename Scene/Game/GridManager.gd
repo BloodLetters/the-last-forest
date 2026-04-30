@@ -42,8 +42,8 @@ func spawn_one_animal():
 		new_animal.spawn_random_animal()
 		
 		# Tentukan posisi grid acak
-		var rx = (randi() % max_col) * cell_size
-		var ry = (randi() % max_row) * cell_size
+		var rx = randi_range(7, 38) * cell_size
+		var ry = randi_range(2, 11) * cell_size
 		new_animal.position = Vector2(rx, ry)
 		
 		# Tambahkan ke dalam GridManager
@@ -51,13 +51,16 @@ func spawn_one_animal():
 		_spawned_count += 1
 
 func _draw():
-	var size = get_viewport_rect().size
+	var start_x = 7 * cell_size
+	var end_x = 38 * cell_size
+	var start_y = 2 * cell_size
+	var end_y = 11 * cell_size
 
-	for x in range(0, size.x, cell_size):
-		draw_my_dashed_line(Vector2(x, 0), Vector2(x, size.y), grid_color, grid_width)
+	for x in range(start_x, end_x + cell_size, cell_size):
+		draw_my_dashed_line(Vector2(x, start_y), Vector2(x, end_y), grid_color, grid_width)
 
-	for y in range(0, size.y, cell_size):
-		draw_my_dashed_line(Vector2(0, y), Vector2(size.x, y), grid_color, grid_width)
+	for y in range(start_y, end_y + cell_size, cell_size):
+		draw_my_dashed_line(Vector2(start_x, y), Vector2(end_x, y), grid_color, grid_width)
 
 
 func draw_my_dashed_line(from: Vector2, to: Vector2, color: Color, width: float):
