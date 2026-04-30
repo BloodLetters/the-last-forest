@@ -31,19 +31,40 @@ func spawn_one_animal():
 	var size = get_viewport_rect().size
 	var max_col = int(size.x) / cell_size
 	var max_row = int(size.y) / cell_size
-	
+
 	if max_col > 0 and max_row > 0:
 		var new_animal = $Animals.duplicate()
-		
+
 		new_animal.visible = true # Tampilkan hasil duplikat
 		new_animal.is_following_mouse = false
-		
+
 		new_animal.spawn_random_animal()
-		
+		var click_area := Area2D.new()
+		click_area.name = "ClickBox"
+		click_area.input_pickable = true
+		# Pastikan Area2D punya collision layer/mask yang aktif supaya bisa menerima input
+		click_area.collision_layer = 1
+		click_area.collision_mask = 1
+
+
+
+		var shape := CollisionShape2D.new()
+		shape.name = "CollisionShape2D"
+		var rect := RectangleShape2D.new()
+		# Ukuran region sprite kamu 16x16, jadi pakai itu sebagai hitbox default
+		rect.size = Vector2(cell_size, cell_size)
+		shape.shape = rect
+		shape.position = Vector2(cell_size, cell_size) * 0.5
+
+		click_area.add_child(shape)
+		new_animal.add_child(click_area)
+
+		click_area.input_event.connect(_on_animal_click_area_input_event.bind(new_animal))
+
 		var rx = randi_range(2, 34) * cell_size
 		var ry = randi_range(0, 15) * cell_size
 		new_animal.position = Vector2(rx, ry)
-		
+
 		add_child(new_animal)
 		_spawned_count += 1
 
@@ -68,7 +89,12 @@ func draw_my_dashed_line(from: Vector2, to: Vector2, color: Color, width: float)
 	while drawn < distance:
 		var start = from + direction * drawn
 		var end = from + direction * min(drawn + dash_length, distance)
-		
+
 		draw_line(start, end, color, width)
-		
+
 		drawn += dash_length + gap_length
+
+
+func _on_animal_click_area_input_event(viewport: Node, event: InputEvent, shape_idx: int, animal: Node) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		print("Clicked " + animal.name)
